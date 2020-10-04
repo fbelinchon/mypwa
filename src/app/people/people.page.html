@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons collapse="true" (click)="openImplModal()" slot="end">
+      <ion-button slot="end">
+        <ion-icon name="information-circle-outline"  size="large"
+          class="icon-toolbar-padding" color="primary" (click)="openImplModal()">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="large">Personas</ion-title>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content id="content" [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!--<cdk-virtual-scroll-viewport
+    class="scroll-viewport"
+    #scroll
+    itemSize="80"
+    minBufferPx="900"
+    maxBufferPx="1350"
+    (scrolledIndexChange)="checkNextPage($event, '')">-->
+  
+  <ion-header collapse="condense">              
+      <ion-toolbar>
+        <ion-buttons collapse="true" (click)="openImplModal()" slot="end">
+          <ion-button slot="end">
+            <ion-icon name="information-circle-outline"  size="large"
+              class="icon-toolbar-padding" color="primary" (click)="openImplModal()">
+            </ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title size="large">Personas</ion-title>
+      </ion-toolbar>
+  </ion-header>
+  <ion-list> 
+ 
+    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+  </ion-list>
+  <!--  <ion-list>
+    <ion-item
+        *cdkVirtualFor="let message of getMessages() trackBy: trackByFn"
+        routerLink="/message/{{message.id}}"
+    >
+    
+  </ion-list>  -->
+ <!-- </cdk-virtual-scroll-viewport>-->
+</ion-content>
