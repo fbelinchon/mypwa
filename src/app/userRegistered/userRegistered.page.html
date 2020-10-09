@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>registered</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="top-background">
+    <img src="/assets/ionifits-icon.png" alt="Ionifits logo" loading="lazy" />
+  </div>
+  
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Welcome to Ionifits</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div class="button-container">
+          <form>    
+            
+
+            <ion-item lines="full">
+              <ion-text>
+                <div>
+                Hola {{name}} Sabemos que eres tú. Pulsa en el botón para entrar.
+                </div>
+              </ion-text>
+            </ion-item>
+        
+            <ion-row>
+              <ion-col> 
+                <ion-button type="submit" (click)="enter()" expand="block">Entrar</ion-button>
+              </ion-col>
+            </ion-row>
+              
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

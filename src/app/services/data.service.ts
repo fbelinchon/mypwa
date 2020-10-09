@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+
+
 
 export interface Message {
   fromName: string;
@@ -12,6 +15,12 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
+  private db : firebase.database.Reference
+  private messageList : AngularFireList<Message>
+
+  constructor(private angularFireDatabase: AngularFireDatabase){
+    this.db =angularFireDatabase.database.ref('message')
+  }
   public messages: Message[] = [
     {
       fromName: 'Matt Chorsey',
@@ -78,13 +87,28 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+ 
 
   public getMessages(): Message[] {
+    
+    //this.firebase.database().ref('message/'+m.id);
+    console.log('LISTADO')
+    this.db.orderByChild("date").on("child_added", function(snapshot) {
+      
+      console.log(snapshot.key);
+    }); 
     return this.messages;
   }
 
   public getMessageById(id: number): Message {
+    
     return this.messages[id];
+  }
+
+  public crearMensajes(message: Message){
+    
+    console.log('MESSAGES:'+this.messages)
+    this.db.push(message);
+     
   }
 }

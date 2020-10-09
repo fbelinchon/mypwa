@@ -1,28 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Sign in User</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <form>    
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item> 
+  <div class="top-background">
+    <img src="/assets/ionifits-icon.png" alt="Ionifits logo" loading="lazy" />
+  </div>
+  
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Welcome to Ionifits</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <div class="button-container">
+          <form>    
+            <ion-item lines="full">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" #email required shape="round"></ion-input>
+            </ion-item> 
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
-
-    <ion-row>
-      <ion-col> 
-      <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+            <ion-item lines="full">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" #password required shape="round"></ion-input>
+            </ion-item>
+        
+            <ion-row>
+              <ion-col> 
+                <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
+              </ion-col>
+              <ion-col> 
+                <ion-button type="submit" (click)="registration()" expand="block">Registro</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-col> 
+                <ion-button type="submit" (click)="logout()" expand="block">Salir</ion-button>
+              </ion-col>
+            <ion-row>
+            </ion-row>
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

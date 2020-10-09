@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataService, Message } from '../services/data.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, throttleTime, mergeMap, scan, map } from 'rxjs/operators';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+
 import { ImplementationModalPage } from '../implementation-modal/implementation-modal.page';
 import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
@@ -18,13 +18,14 @@ export class PeoplePage implements OnInit {
   constructor(private data: DataService,public modalController: ModalController, 
     private routerOutlet: IonRouterOutlet) {}
 
-  refresh(ev) {
+  /*  refresh(ev) {
     setTimeout(() => {
       ev.detail.complete();
-    }, 3010);
-  }
-
-  getMessages(): Message[] {
+    }, 3010); 
+  }*/
+ 
+  getMessages(): Message[]{
+    console.log('People GetMessage');
     return this.data.getMessages();
   }
 

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>altaMensaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-item lines="full">
+      <ion-label position="floating">FromName</ion-label>
+      <ion-input type="text" #fromName required shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Subject</ion-label>
+      <ion-input type="textbox" #subject required shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Date</ion-label>
+      <ion-input type="date" #date required shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">id</ion-label>
+      <ion-input type="number" #icon required shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">read</ion-label>
+      <ion-input type="text" #read required shape="round"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col> 
+      <ion-button type="submit" (click)="createMessage(fromName, subject,date,icon,read)" expand="block">Nuevo</ion-button>
+    </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

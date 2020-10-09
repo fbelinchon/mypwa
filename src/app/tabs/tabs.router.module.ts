@@ -19,11 +19,11 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'pedidos',
+        path: 'addMessage',
         children: [
           {
             path: '',
-            loadChildren: () => import('../pedidos/pedidos.module').then(m => m.PedidosPageModule)
+            loadChildren: () => import('../alta-mensaje/alta-mensaje.module').then(m => m.AltaMensajePageModule)
           }
         ],
       },

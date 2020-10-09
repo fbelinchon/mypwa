@@ -3,26 +3,45 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Register User</ion-title>
+    <ion-title>Registro de usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>    
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item> 
+   <div class="top-background">
+    <img src="/assets/ionifits-icon.png" alt="Ionifits logo" loading="lazy" />
+  </div>
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Pantalla de registro</ion-card-title>
+      </ion-card-header>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
+      <ion-card-content>
+        <div class="button-container">
+          <form>    
+            <ion-item lines="full">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" #email required shape="round"></ion-input>
+            </ion-item> 
 
-    <ion-row>
-      <ion-col> 
-      <ion-button type="submit" (click)="signUp(email, password)" expand="block">Register</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+            <ion-item lines="full">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" #password required shape="round"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Repetir Password</ion-label>
+              <ion-input type="password" #repassword required shape="round"></ion-input>
+            </ion-item>
+
+            <ion-row>
+              <ion-col> 
+                <ion-button type="submit" (click)="signUp(email, password,repassword)" expand="block">Register</ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

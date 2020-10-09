@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
-  { path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule) },
-  { path: 'personas', loadChildren: () => import('./people/people.module').then(m => m.PeoplePageModule) },
+  { path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+  canActivate:[AuthGuard] },
+  { path: 'addMessage', loadChildren: () => import('./alta-mensaje/alta-mensaje.module').then(m => m.AltaMensajePageModule),
+  canActivate:[AuthGuard] },
+  { path: 'personas', loadChildren: () => import('./people/people.module').then(m => m.PeoplePageModule),
+  canActivate:[AuthGuard] 
+  },
+  { path: 'userRegistered', loadChildren: () => import('./userRegistered/userRegistered.module').then(m => m.RegisteredPageModule),
+  canActivate:[AuthGuard] 
+  },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -38,6 +47,20 @@ const routes: Routes = [
     path: 'verify-email',
     loadChildren: () => import('./verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   },
+  {
+    path: 'registered',
+    loadChildren: () => import('./userRegistered/userRegistered.module').then( m => m.RegisteredPageModule)
+  },
+  {
+    path: 'alta-mensaje',
+    loadChildren: () => import('./alta-mensaje/alta-mensaje.module').then( m => m.AltaMensajePageModule)
+  },  {
+    path: 'message-list',
+    loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
+  },
+
+
+
 
 ];
 
