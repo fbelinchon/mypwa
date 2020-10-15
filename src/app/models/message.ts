@@ -1,5 +1,7 @@
-export interface message{
-    title: string;
-    url: string;
-    icon: string;
-}
+export interface Message {
+    fromName: string;
+    subject: string;
+    text: string;
+    date: string;
+    id: string;
+  }

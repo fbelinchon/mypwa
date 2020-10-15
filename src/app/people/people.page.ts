@@ -1,11 +1,13 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataService } from '../services/data.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, throttleTime, mergeMap, scan, map } from 'rxjs/operators';
 
 import { ImplementationModalPage } from '../implementation-modal/implementation-modal.page';
 import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
+import { Message } from '../models/message';
+
 
 @Component({
   selector: 'app-people',
@@ -13,23 +15,19 @@ import { IonRouterOutlet } from '@ionic/angular';
   styleUrls: ['./people.page.scss'],
 })
 export class PeoplePage implements OnInit {
-
- // @ViewChild(CdkVirtualScrollViewport, { static: true }) viewport: CdkVirtualScrollViewport;
-  constructor(private data: DataService,public modalController: ModalController, 
-    private routerOutlet: IonRouterOutlet) {}
+  public messages: Observable<Message[]>;
+  constructor(private data: DataService, public modalController: ModalController,
+              private routerOutlet: IonRouterOutlet) {}
 
   /*  refresh(ev) {
     setTimeout(() => {
       ev.detail.complete();
-    }, 3010); 
+    // tslint:disable-next-line: no-trailing-whitespace
+    }, 3010);
   }*/
- 
-  getMessages(): Message[]{
-    console.log('People GetMessage');
-    return this.data.getMessages();
-  }
 
   ngOnInit() {
+    this.messages = this.data.getMessage().valueChanges();
   }
 
   async openImplModal() {
@@ -38,9 +36,9 @@ export class PeoplePage implements OnInit {
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
     });
-     
+
     modal.onDidDismiss().then((result) => { });
-    
+
     return await modal.present();
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Message } from '../services/data.service';
+import { Message } from '../models/message';
+
 
 @Component({
   selector: 'app-message',
@@ -8,6 +9,7 @@ import { Message } from '../services/data.service';
 })
 export class MessageComponent implements OnInit {
   @Input() message: Message;
+  @Input() id: string;
 
   constructor() { }
 

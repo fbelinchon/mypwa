@@ -38,8 +38,8 @@ const routes: Routes = [
         ],
       },
       {
-        path:'',
-        children:[
+        path: '',
+        children: [
           {
             path: '',
             loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
@@ -48,7 +48,7 @@ const routes: Routes = [
       }
     ]
   },
-  
+
 ];
 
 @NgModule({

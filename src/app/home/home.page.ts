@@ -1,10 +1,11 @@
-import { Component,OnInit } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../services/data.service';
 import { ImplementationModalPage } from '../implementation-modal/implementation-modal.page';
 import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, throttleTime, mergeMap, scan, map } from 'rxjs/operators';
+import { Message } from '../models/message';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,10 @@ import { tap, throttleTime, mergeMap, scan, map } from 'rxjs/operators';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  
-  constructor(private data: DataService,public modalController: ModalController, 
-    private routerOutlet: IonRouterOutlet) {}
+  messages: Message[];
+
+  constructor(private data: DataService, public modalController: ModalController,
+              private routerOutlet: IonRouterOutlet) {}
 
   refresh(ev) {
     setTimeout(() => {
@@ -22,8 +24,9 @@ export class HomePage implements OnInit {
     }, 3010);
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  getMessages() {
+    this.messages = [];
+
   }
 
   async openImplModal() {
@@ -31,15 +34,15 @@ export class HomePage implements OnInit {
       component: ImplementationModalPage,
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
-      
+
     });
-     
+
     modal.onDidDismiss().then((result) => { });
-    
+
     return await modal.present();
   }
 
   ngOnInit() {
   }
-  
+
 }

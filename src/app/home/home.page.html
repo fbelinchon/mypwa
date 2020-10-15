@@ -12,9 +12,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <!--<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher>-->
   
   <ion-header collapse="condense">              
       <ion-toolbar>
@@ -31,6 +31,6 @@
   
   <ion-list>
  
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+    <app-message *ngFor="let message of getMessages()|async" [message]="message"></app-message>
   </ion-list>
 </ion-content>

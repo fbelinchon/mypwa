@@ -1,9 +1,11 @@
-import { Message } from './../services/data.service';
+
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Component, OnInit } from '@angular/core';
 import { dateDataSortValue } from 'ionic-angular/util/datetime-util';
 import { identifierModuleUrl } from '@angular/compiler';
-import {DataService} from '../services/data.service'
+import {DataService} from '../services/data.service';
+import { LoadingController, AlertController} from '@ionic/angular';
+import { Message } from '../models/message';
 
 
 @Component({
@@ -14,27 +16,35 @@ import {DataService} from '../services/data.service'
 
 
 export class AltaMensajePage implements OnInit {
-  private db : firebase.database.Reference
-  constructor(private angularFireDatabase:AngularFireDatabase,private dataservice: DataService) {
-    
-    this.db =angularFireDatabase.database.ref('message')
+  private db: firebase.database.Reference;
+  constructor(private angularFireDatabase: AngularFireDatabase,
+              private dataservice: DataService,
+              private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController) {
+
+    this.db = angularFireDatabase.database.ref('message');
    }
 
   ngOnInit() {
   }
 
-  createMessage(_fromName,_subject,_date,_id,_read){
-    const myMessage: Message ={
-      fromName: _fromName.value,
-      subject: _subject.value,
-      date : _date.value,
-      id: _id.value,
-      read: _read.value
-    }
-    console.log(myMessage);
-    this.dataservice.crearMensajes(myMessage)
-   
-   
-  }
+  async createMessage(fromName, subject, date, text){
+    const myMessage: Message = {
+      fromName: fromName.value,
+      subject: subject.value,
+      date : date.value,
+      text : text.value
+    };
 
+    const loading = this.loadingCtrl.create();
+    this.dataservice.crearMensajes(myMessage).then(() => {
+      this.loadingCtrl.dismiss().then(() => {
+        console.log('OK');
+      });
+    }).catch(() => {
+      console.log('OK');
+    });
+
+
+  }
 }

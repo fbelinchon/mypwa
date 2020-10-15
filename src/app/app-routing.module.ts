@@ -4,14 +4,14 @@ import { AuthGuard } from './services/user/auth.guard';
 
 const routes: Routes = [
   { path: 'tabs', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-  canActivate:[AuthGuard] },
+  canActivate: [AuthGuard] },
   { path: 'addMessage', loadChildren: () => import('./alta-mensaje/alta-mensaje.module').then(m => m.AltaMensajePageModule),
-  canActivate:[AuthGuard] },
+  canActivate: [AuthGuard] },
   { path: 'personas', loadChildren: () => import('./people/people.module').then(m => m.PeoplePageModule),
-  canActivate:[AuthGuard] 
+  canActivate: [AuthGuard]
   },
   { path: 'userRegistered', loadChildren: () => import('./userRegistered/userRegistered.module').then(m => m.RegisteredPageModule),
-  canActivate:[AuthGuard] 
+  canActivate: [AuthGuard]
   },
   {
     path: 'home',
@@ -54,7 +54,8 @@ const routes: Routes = [
   {
     path: 'alta-mensaje',
     loadChildren: () => import('./alta-mensaje/alta-mensaje.module').then( m => m.AltaMensajePageModule)
-  },  {
+  },
+  {
     path: 'message-list',
     loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
   },

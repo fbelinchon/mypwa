@@ -15,6 +15,7 @@ import { ScrollingModule  } from '@angular/cdk/scrolling';
     CommonModule,
     FormsModule,
     IonicModule,
+    // tslint:disable-next-line: no-trailing-whitespace
     MessageComponentModule, 
     ScrollingModule,
     PeoplePageRoutingModule
