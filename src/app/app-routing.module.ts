@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path: 'message-list',
     loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
+  },  {
+    path: 'photo-gallery',
+    loadChildren: () => import('./photo-gallery/photo-gallery.module').then( m => m.PhotoGalleryPageModule)
   },
+
 
 
 

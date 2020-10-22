@@ -13,7 +13,7 @@
       <h2>
         {{ message.fromName }}
         <span class="date">
-          <ion-note>{{ message.date }}</ion-note>
+          <ion-note>{{  (message | async)?.date }}</ion-note>
         </span>
       </h2>
       <h3>To: <ion-note>Me</ion-note></h3>
@@ -21,9 +21,9 @@
   </ion-item>
   
   <div class="ion-padding">
-    <h1>{{ message.subject }}</h1>
+    <h1>{{ (message | async)?.subject }}</h1>
     <p>
-      {{ message.text }}
+      {{ (message | async)?.text }}
     </p>
   </div>
 </ion-content>

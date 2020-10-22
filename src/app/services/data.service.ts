@@ -31,6 +31,7 @@ export class DataService {
 
   public crearMensajes(message: Message): Promise<void>{
     const id = this.firestore.createId();
+    // message.id = id;
     return this.firestore.doc(`message/${id}`).set(message);
 
   }

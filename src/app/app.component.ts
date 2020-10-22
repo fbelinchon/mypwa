@@ -1,20 +1,19 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Plugins, StatusBarStyle, Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
-import * as firebase from 'firebase/app';
-import {environment}  from '../environments/environment.prod'
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { DataService, Message } from './services/data.service';
 
-//import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-//import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { DataService} from './services/data.service';
+
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
 const { SplashScreen, StatusBar } = Plugins;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent  {
+export class AppComponent implements OnInit  {
   public selectedIndex = 0;
   public appPages = [
     {
@@ -39,29 +38,29 @@ export class AppComponent  {
   constructor(
     private platform: Platform,
     private db: AngularFireDatabase,
-    private data:DataService
-    //private splashScreen: SplashScreen,
-    //private statusBar: StatusBar
+    private data: DataService
+    // private splashScreen: SplashScreen,
+    // private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    //firebase.initializeApp(environment.firebaseConfig)
+    // firebase.initializeApp(environment.firebaseConfig)
     if (Capacitor.isNative) {
       StatusBar.setStyle({ style: StatusBarStyle.Light });
 
-      /* To make sure we provide the fastest app loading experience 
-          for our users, hide the splash screen automatically 
+      /* To make sure we provide the fastest app loading experience
+          for our users, hide the splash screen automatically
           when the app is ready to be used:
           // tslint:disable-next-line: no-trailing-whitespace
-          
+
           https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
       */
       SplashScreen.hide();
     }
     this.platform.ready().then(() => {
-      //StatusBar.setStyle()styleDefault();
+      // StatusBar.setStyle()styleDefault();
       SplashScreen.hide();
     });
   }
@@ -72,7 +71,7 @@ export class AppComponent  {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
     console.log('ON INT APP');
-    //this.data.crearMensajes()
+    // this.data.crearMensajes()
 
-  } 
+  }
 }

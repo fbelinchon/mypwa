@@ -1,7 +1,9 @@
+
 export interface Message {
     fromName: string;
     subject: string;
     text: string;
-    date: string;
-    id: string;
+    date: firebase.firestore.Timestamp;
+    latitude: number;
+    longitude: number;
   }

@@ -7,7 +7,7 @@ export const environment = {
   firebaseConfig : {
     apiKey: 'AIzaSyCsFM-O9ZcpeDpZr-bQAlweGYf2p2znrbg',
     authDomain: 'pwa1-4af2c.firebaseapp.com',
-    databaseURL: 'https://localhost:9001?ns=emulatorui',
+    databaseURL: 'https://pwa1-4af2c.firebaseio.com',
     projectId: 'pwa1-4af2c',
     storageBucket: 'pwa1-4af2c.appspot.com',
     messagingSenderId: '966683170526',

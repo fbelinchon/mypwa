@@ -27,7 +27,7 @@ export class PeoplePage implements OnInit {
   }*/
 
   ngOnInit() {
-    this.messages = this.data.getMessage().valueChanges();
+    this.messages = this.data.getMessage().valueChanges({idField: 'id'});
   }
 
   async openImplModal() {
