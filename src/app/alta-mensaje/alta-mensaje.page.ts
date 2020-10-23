@@ -8,7 +8,10 @@ import { LoadingController, AlertController} from '@ionic/angular';
 import { Message } from '../models/message';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import * as firebase from 'firebase';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Plugins } from '@capacitor/core';
+const { Geolocation } = Plugins;
+
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 
@@ -33,22 +36,36 @@ export class AltaMensajePage implements OnInit {
               public dataservice: DataService,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
-              formBuilder: FormBuilder,
-              private geolocation: Geolocation,
+              private formBuilder: FormBuilder,
               // private camera: Camera,
               public loadingController: LoadingController
               ) {
-    this.createMessageForm = formBuilder.group({
-      fromName : ['', Validators.required],
-      subject: ['', Validators.required],
-      date: ['', Validators.required],
-      comment: ['', Validators.required],
-    });
+
     // this.db = angularFireDatabase.database.ref('message');
    }
 
-ngOnInit() {
+
+   ngOnInit(){
+
+  console.log('ESTATUS ' + this.createMessageForm.valid);
+  // this.createMessageForm.markAllAsTouched();
+  this.createMessageForm = this.formBuilder.group({
+    fromName : ['a', Validators.required],
+    subject: ['', Validators.required],
+    date: ['', Validators.required],
+    comment: ['', Validators.required],
+  });
   }
+
+  ionViewWillEnter(){
+    console.log('IONIC WILL ENTER');
+  }
+  ionViewDidEnter(){
+    console.log('IONIC DID ENTER');
+
+    // this.createMessageForm.markAllAsTouched();
+  }
+
 
 async createMessage() {
 
@@ -82,13 +99,29 @@ async createMessage() {
   }
 
 async getGPS() {
-    await this.geolocation.getCurrentPosition().then((resp) => {
+
+  const loading = await this.loadingCtrl.create({
+    message: 'Espera a obtener tu GPS'
+  });
+  await loading.present();
+
+  Geolocation.getCurrentPosition().then((coordinates) => {
+    this.loadingCtrl.dismiss().then(() => {
+      this.latitude = coordinates.coords.latitude;
+      this.longitude = coordinates.coords.longitude;
+      }).catch((error) =>  {
+        console.log('ERROR GPS');
+      });
+  }).catch((error) => {
+    console.log('Error getting location', error);
+  });
+    /* await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
       console.log('GPS: x:' + this.latitude + 'y:' + this.longitude);
      }).catch((error) => {
        console.log('Error getting location', error);
-     });
+     }); */
 
    /*  let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
@@ -97,28 +130,4 @@ async getGPS() {
       // data.coords.longitude
      }); */
   }
-
-  async takePicture(){
-
-    /* const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-      console.log('Picture ' + imageData);
-      // let base64Image = 'data:image/jpeg;base64,' + imageData;
-     }, (err) => {
-      console.log('Error ' + err);
-     }); */
-  }
-
-  changeListener($event): void {
-    const file = $event.target.files[0];
-    const reader = new FileReader();
-    console.log('file ' + $event.target.files[0].path);
-  }
-
 }
