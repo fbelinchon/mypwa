@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -36,8 +36,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     ReactiveFormsModule,
     AppRoutingModule,
     ScrollingModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-    ServiceWorkerModule.register('ngsw-worker.js')
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    //ServiceWorkerModule.register('ngsw-worker.js')
   ],
   providers: [
     StatusBar,

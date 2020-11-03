@@ -10,7 +10,7 @@ import { Message } from '../models/message';
 
 
 @Component({
-  selector: 'app-people',
+  selector: 'people',
   templateUrl: './people.page.html',
   styleUrls: ['./people.page.scss'],
 })

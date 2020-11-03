@@ -23,10 +23,11 @@ export class DataService {
 
   public getMessage(): AngularFirestoreCollection<Message>{
     return this.firestore.collection('message');
+
   }
 
   public getMessageById(id: string): AngularFirestoreDocument<Message> {
-    return this.firestore.collection('message').doc(id);
+    return this.firestore.collection('message').doc<Message>(id);
   }
 
   public crearMensajes(message: Message): Promise<void>{
@@ -34,5 +35,26 @@ export class DataService {
     // message.id = id;
     return this.firestore.doc(`message/${id}`).set(message);
 
+  }
+
+  public static convertDate(firebaseObject: any) {
+    if (!firebaseObject) return null;
+
+    for (const [key, value] of Object.entries(firebaseObject)) {
+
+      // covert items inside array
+      if (value && Array.isArray(value) )
+        firebaseObject[key] = value.map(item => this.convertDate(item));
+
+      // convert inner objects
+      if (value && typeof value === 'object' ){
+        firebaseObject[key] = this.convertDate(value);
+      }
+
+      // convert simple properties
+      if (value && value.hasOwnProperty('seconds'))
+        firebaseObject[key] = (value as firebase.firestore.Timestamp).toDate();
+    }
+    return firebaseObject;
   }
 }

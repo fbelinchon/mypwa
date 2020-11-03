@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+  },
+  {
     path: 'message/:id',
     loadChildren: () => import('./view-message/view-message.module').then( m => m.ViewMessagePageModule)
   },
@@ -58,9 +62,14 @@ const routes: Routes = [
   {
     path: 'message-list',
     loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
-  },  {
+  },
+  {
     path: 'photo-gallery',
     loadChildren: () => import('./photo-gallery/photo-gallery.module').then( m => m.PhotoGalleryPageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
 
 

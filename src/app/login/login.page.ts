@@ -7,7 +7,7 @@ import 'firebase/auth';
 
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })

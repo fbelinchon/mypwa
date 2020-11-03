@@ -1,7 +1,8 @@
 {
   "name": "pwaChiChat",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

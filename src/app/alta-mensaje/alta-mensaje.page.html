@@ -6,32 +6,37 @@
 
 <ion-content>
   <div>
-    <form [formGroup]="createMessageForm" (submit)="createMessage()" >
+    <form [formGroup]="createMessageForm" (submit)="createMessage()">
     <ion-item lines="full">
       <ion-label position="floating">FromName</ion-label>
-      <ion-input formControlName="fromName" required type="text" shape="round"></ion-input>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-input formControlName="fromName" required="true" type="text" shape="round"></ion-input>
+      
     </ion-item>
     <ion-item lines="full">
+      <ion-icon name="newspaper" slot="start"></ion-icon>
       <ion-label position="floating">Subject</ion-label>
-      <ion-input formControlName="subject" type="textbox" required shape="round"></ion-input>
+      <ion-input formControlName="subject" type="textbox" required="true" shape="round"></ion-input>
     </ion-item>
     <ion-item lines="full">
+      <ion-icon name="calendar" slot="start"></ion-icon>
       <ion-label position="floating">Date</ion-label>
-      <ion-datetime formControlName="date" type="date" displayFormat="DD MMMM YYYY" required shape="round"></ion-datetime>
+      <ion-datetime formControlName="date" type="date" displayFormat="DD MMMM YYYY" required="true" shape="round"></ion-datetime>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Comentario</ion-label>
-      <ion-textarea formControlName="comment" type="text" required shape="round"></ion-textarea>
+      <ion-textarea formControlName="comment" type="text" required="true" shape="round"></ion-textarea>
     </ion-item>
-    <ion-item lines="full">  
+    <ion-item lines="full"> 
+      <ion-icon name="map" slot="start"></ion-icon> 
       <ion-button type="button" (click)="getGPS()" shape="round" expand="block">GPS</ion-button>
     </ion-item>
     <ion-row>
       <ion-col>
-         <ion-label position="floating">Latitud: {{latitude}}</ion-label>
+         <ion-input readonly formControlName="latitude" value="Latitud: {{latitude}}"></ion-input>
       </ion-col>
       <ion-col>
-         <ion-label position="floating">Longitud: {{longitude}}</ion-label>
+         <ion-input readonly formControlName="longitude" value="Longitud: {{longitude}}"></ion-input>
       </ion-col>
     </ion-row>
    <!-- <ion-item lines="full">  

@@ -8,6 +8,7 @@ import { AltaMensajePageRoutingModule } from './alta-mensaje-routing.module';
 
 import { AltaMensajePage } from './alta-mensaje.page';
 
+
 @NgModule({
   imports: [
     CommonModule,

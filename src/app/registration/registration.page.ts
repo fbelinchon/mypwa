@@ -4,7 +4,7 @@ import { AuthenticationService } from "../services/authentication.service";
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-registration',
+  selector: 'registration',
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
 })

@@ -8,11 +8,12 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrls: ['./userRegistered.page.scss'],
 })
 export class RegisteredPage implements OnInit {
+  public name = "";
 
   constructor(private activatedRoute :ActivatedRoute, private route: Router) { }
  
   ngOnInit() {
-    const name = this.activatedRoute.snapshot.paramMap.get('name');
+    this.name = this.activatedRoute.snapshot.paramMap.get('name');
   }
 
   enter(){

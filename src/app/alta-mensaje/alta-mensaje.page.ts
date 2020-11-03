@@ -28,7 +28,7 @@ export class AltaMensajePage implements OnInit {
   // private db: firebase.database.Reference;
   public latitude = 0;
   public longitude = 0;
-  public createMessageForm: FormGroup;
+  createMessageForm: FormGroup;
 
 
 
@@ -45,16 +45,18 @@ export class AltaMensajePage implements OnInit {
    }
 
 
-   ngOnInit(){
+  ngOnInit() {
 
-  console.log('ESTATUS ' + this.createMessageForm.valid);
-  // this.createMessageForm.markAllAsTouched();
-  this.createMessageForm = this.formBuilder.group({
-    fromName : ['a', Validators.required],
-    subject: ['', Validators.required],
-    date: ['', Validators.required],
-    comment: ['', Validators.required],
-  });
+    console.log('ESTATUS ');
+    // this.createMessageForm.markAllAsTouched();
+    this.createMessageForm = this.formBuilder.group({
+      fromName: ['a', Validators.required],
+      subject: ['', Validators.required],
+      date: ['', Validators.required],
+      comment: ['', Validators.required],
+      latitude:['',Validators.required],
+      longitude:['',Validators.required],
+    });
   }
 
   ionViewWillEnter(){
@@ -72,11 +74,15 @@ async createMessage() {
     const myMessage: Message = {
       fromName: this.createMessageForm.value.fromName,
       subject: this.createMessageForm.value.subject,
-      // date : this.createMessageForm.value.date,
+      //date : new Date(this.createMessageForm.value.date),
       date: firebase.firestore.Timestamp.fromDate(new Date(this.createMessageForm.value.date)),
       text : this.createMessageForm.value.comment,
-      latitude : this.latitude,
-      longitude: this.longitude
+      coordinates: {
+        latitude : this.latitude,
+        longitude: this.longitude
+      }
+     
+      
       // id: ''
     };
 
@@ -88,8 +94,8 @@ async createMessage() {
     this.dataservice.crearMensajes(myMessage).then(() => {
       this.loadingCtrl.dismiss().then(() => {
         this.createMessageForm.reset();
-        this.latitude = 0;
-        this.longitude = 0;
+        this.latitude = undefined;
+        this.longitude = undefined;
       });
     }).catch(() => {
       console.log('ERROR Mensaje');
@@ -105,7 +111,7 @@ async getGPS() {
   });
   await loading.present();
 
-  Geolocation.getCurrentPosition().then((coordinates) => {
+  Geolocation.getCurrentPosition({timeout: 10}).then((coordinates) => {
     this.loadingCtrl.dismiss().then(() => {
       this.latitude = coordinates.coords.latitude;
       this.longitude = coordinates.coords.longitude;
