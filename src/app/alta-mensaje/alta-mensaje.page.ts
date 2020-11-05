@@ -60,8 +60,8 @@ export class AltaMensajePage implements OnInit {
       subject: new FormControl('', Validators.required),
       date: ['', Validators.required],
       comment: ['', Validators.required],
-      latitude:['',Validators.required],
-      longitude:['',Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
     });
 
   
@@ -87,15 +87,15 @@ async createMessage() {
     const myMessage: Message = {
       fromName: this.createMessageForm.value.fromName,
       subject: this.createMessageForm.value.subject,
-      //date : new Date(this.createMessageForm.value.date),
+      // date : new Date(this.createMessageForm.value.date),
       date: firebase.firestore.Timestamp.fromDate(new Date(this.createMessageForm.value.date)),
       text : this.createMessageForm.value.comment,
       coordinates: {
         latitude : this.latitude,
         longitude: this.longitude
       }
-     
-      
+
+
       // id: ''
     };
 

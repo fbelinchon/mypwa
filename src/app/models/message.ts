@@ -1,4 +1,4 @@
-import { Coordinates } from './coordinates';
+import { Coordenadas } from './coordenadas';
 
 export interface Message {
     [x: string]: any;
@@ -6,7 +6,7 @@ export interface Message {
     subject: string;
     text: string;
     date: firebase.firestore.Timestamp;
-    //date: Date;
-    coordinates: Coordinates;
+    // date: Date;
+    coordinates: Coordenadas;
     id?: string;
   }
