@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Proveedor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+    
+    <form [formGroup]="createProviderForm" (submit)="createProvider()">
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" required="true" type="text" shape="round"></ion-input>  
+    </ion-item>
+    <ion-item lines="full">
+      
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input formControlName="apellidos" type="text" required="true" shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="correo" type="email" required="true" shape="round"></ion-input>
+    </ion-item>
+    <ion-item lines="full"> 
+      <ion-icon name="map" slot="start"></ion-icon> 
+      <ion-button type="button" (click)="getGPS()" shape="round" expand="block">GPS</ion-button>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+         <ion-input readonly formControlName="latitude" value="Latitud: {{latitude}}"></ion-input>
+      </ion-col>
+      <ion-col>
+         <ion-input readonly formControlName="longitude" value="Longitud: {{longitude}}"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+
+    <ion-fab-button (click)="addNewToGallery()" >
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+    </ion-fab>
+    <ion-item lines="full">
+      <ion-label position="floating">Comentario</ion-label>
+      <ion-textarea formControlName="comment" type="textbox" required="true" shape="round"></ion-textarea>
+    </ion-item>
+    <ion-avatar>
+      <ion-img [src]="foto3"></ion-img>
+    </ion-avatar>
+    <ion-row>
+      <ion-col> 
+      <ion-button type="submit"  [disabled]="!createProviderForm.valid" expand="block">Nuevo</ion-button>
+    </ion-col>
+    </ion-row>
+    </form>
+  </div>
+</ion-content>

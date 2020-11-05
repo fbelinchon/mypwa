@@ -54,8 +54,8 @@ export class AltaMensajePage implements OnInit {
       subject: ['', Validators.required],
       date: ['', Validators.required],
       comment: ['', Validators.required],
-      latitude:['',Validators.required],
-      longitude:['',Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
     });
   }
 
@@ -74,15 +74,15 @@ async createMessage() {
     const myMessage: Message = {
       fromName: this.createMessageForm.value.fromName,
       subject: this.createMessageForm.value.subject,
-      //date : new Date(this.createMessageForm.value.date),
+      // date : new Date(this.createMessageForm.value.date),
       date: firebase.firestore.Timestamp.fromDate(new Date(this.createMessageForm.value.date)),
       text : this.createMessageForm.value.comment,
       coordinates: {
         latitude : this.latitude,
         longitude: this.longitude
       }
-     
-      
+
+
       // id: ''
     };
 
@@ -111,7 +111,7 @@ async getGPS() {
   });
   await loading.present();
 
-  Geolocation.getCurrentPosition({timeout: 10}).then((coordinates) => {
+  Geolocation.getCurrentPosition({timeout: 10000}).then((coordinates) => {
     this.loadingCtrl.dismiss().then(() => {
       this.latitude = coordinates.coords.latitude;
       this.longitude = coordinates.coords.longitude;
@@ -119,7 +119,9 @@ async getGPS() {
         console.log('ERROR GPS');
       });
   }).catch((error) => {
-    console.log('Error getting location', error);
+    this.loadingCtrl.dismiss().then(() => {
+      console.log('Error getting location', error);
+    });
   });
     /* await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;

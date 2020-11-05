@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'addProvider',
+    loadChildren: () => import('./provider/provider.module').then(m => m.ProviderPageModule)
+  },
+  {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
@@ -71,6 +75,11 @@ const routes: Routes = [
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
+  {
+    path: 'provider',
+    loadChildren: () => import('./provider/provider.module').then( m => m.ProviderPageModule)
+  },
+
 
 
 
