@@ -6,10 +6,11 @@ import { identifierModuleUrl } from '@angular/compiler';
 import {DataService} from '../services/data.service';
 import { LoadingController, AlertController} from '@ionic/angular';
 import { Message } from '../models/message';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,FormControl} from '@angular/forms';
 import * as firebase from 'firebase';
 import { Plugins } from '@capacitor/core';
 const { Geolocation } = Plugins;
+import { NgZone } from '@angular/core';
 
 // import { Geolocation } from '@ionic-native/geolocation/ngx';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -29,6 +30,7 @@ export class AltaMensajePage implements OnInit {
   public latitude = 0;
   public longitude = 0;
   createMessageForm: FormGroup;
+  //submitted = false;
 
 
 
@@ -37,34 +39,45 @@ export class AltaMensajePage implements OnInit {
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               private formBuilder: FormBuilder,
-              // private camera: Camera,
+              private zone: NgZone,
               public loadingController: LoadingController
               ) {
+                
 
     // this.db = angularFireDatabase.database.ref('message');
    }
 
-
+   refresh() {
+    this.zone.run(() => {
+      console.log('force update the screen');
+    });
+  }
   ngOnInit() {
 
-    console.log('ESTATUS ');
-    // this.createMessageForm.markAllAsTouched();
+    
     this.createMessageForm = this.formBuilder.group({
-      fromName: ['a', Validators.required],
-      subject: ['', Validators.required],
+      fromName: new FormControl('value', Validators.required),
+      subject: new FormControl('', Validators.required),
       date: ['', Validators.required],
       comment: ['', Validators.required],
       latitude:['',Validators.required],
       longitude:['',Validators.required],
     });
+
+  
+    console.log('ESTATUS ');
+    // this.createMessageForm.markAllAsTouched();
+    
   }
 
   ionViewWillEnter(){
+    this.createMessageForm.enable();
     console.log('IONIC WILL ENTER');
   }
   ionViewDidEnter(){
+    this.createMessageForm.enable();
     console.log('IONIC DID ENTER');
-
+    this.refresh();
     // this.createMessageForm.markAllAsTouched();
   }
 
@@ -110,8 +123,9 @@ async getGPS() {
     message: 'Espera a obtener tu GPS'
   });
   await loading.present();
+  
 
-  Geolocation.getCurrentPosition({timeout: 10}).then((coordinates) => {
+  Plugins.Geolocation.getCurrentPosition({enableHighAccuracy: true,timeout: 10000}).then((coordinates) => {
     this.loadingCtrl.dismiss().then(() => {
       this.latitude = coordinates.coords.latitude;
       this.longitude = coordinates.coords.longitude;
@@ -120,6 +134,17 @@ async getGPS() {
       });
   }).catch((error) => {
     console.log('Error getting location', error);
+    this.loadingCtrl.dismiss();
+    
+    const alert = this.alertCtrl.create({
+      header:'GPS',
+      subHeader: 'No se puede utilizar el GPS',
+      message:'Utilice el mapa para seleccionar su ubicación.',
+      buttons:['OK']
+    });
+    alert.then(res => {
+      res.present();
+    })
   });
     /* await this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
@@ -136,4 +161,7 @@ async getGPS() {
       // data.coords.longitude
      }); */
   }
+ /*  get registerFormControl() {
+    return this.createMessageForm.controls;
+  } */
 }

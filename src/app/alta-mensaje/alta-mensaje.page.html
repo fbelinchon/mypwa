@@ -16,7 +16,10 @@
     <ion-item lines="full">
       <ion-icon name="newspaper" slot="start"></ion-icon>
       <ion-label position="floating">Subject</ion-label>
-      <ion-input formControlName="subject" type="textbox" required="true" shape="round"></ion-input>
+      <ion-input  formControlName="subject" type="textbox" required="true" shape="round"></ion-input>
+      <ion-item *ngIf="!createMessageForm.controls.subject.valid  && createMessageForm.controls.subject.dirty">
+        <p>Please enter a valid name.</p>
+    </ion-item>
     </ion-item>
     <ion-item lines="full">
       <ion-icon name="calendar" slot="start"></ion-icon>
