@@ -6,6 +6,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ProviderService } from '../services/provider/provider.service';
 import { Proveedor } from '../models/provider';
+import 'firebase/auth';
 const { Geolocation } = Plugins;
 const { Camera } = Plugins;
 
@@ -18,6 +19,7 @@ export class ProviderPage implements OnInit {
   public latitude = 0;
   public longitude = 0;
   createProviderForm: FormGroup;
+  correo: string;
   foto: string;
   foto2: string;
   foto3: string;
@@ -35,11 +37,21 @@ export class ProviderPage implements OnInit {
     this.createProviderForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
-      correo: ['', Validators.required],
+      // correo: ['', Validators.required],
       comment: ['', Validators.required],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
     });
+
+    firebase.auth().onAuthStateChanged((user: firebase.User) =>{
+      console.log("USER "+user.email)
+      if (user) {
+        
+        this.correo = user.email;
+      }
+    });
+    console.log('CORREo ' + this.correo);
+   
   }
 
   async createProvider() {
@@ -49,7 +61,7 @@ export class ProviderPage implements OnInit {
       apellidos: this.createProviderForm.controls.apellidos.value,
       fechaCreacion: firebase.firestore.Timestamp.fromDate(new Date()),
       descripcion : this.createProviderForm.controls.comment.value,
-      correo: this.createProviderForm.controls.correo.value,
+      correo: this.correo,
       foto: 'foto',
       coordenadas: {
         latitude : this.latitude,
@@ -78,19 +90,8 @@ export class ProviderPage implements OnInit {
 
   }
 
-  correo() {
-    this.createProviderForm.get('correo');
-  }
-  nombre() {
-    this.createProviderForm.get('nombre');
-  }
-  apellidos() {
-    this.createProviderForm.get('apellidos');
-  }
-  comment() {
-    this.createProviderForm.get('comment');
-  }
-
+  
+  
 
   async getGPS() {
     const loading = await this.loadingCtrl.create({
